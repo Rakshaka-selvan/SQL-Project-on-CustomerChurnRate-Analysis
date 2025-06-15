@@ -1,4 +1,4 @@
-# SQL-Project-on-CustomerChurnRate-Analysis
+# SQL-Project-on-telco_CustomerChurnRate-Analysis
 A project using the cutomer details like partnership, dependencies, customer id and few other columns to calculate the churn rate and analyse accordingly.
 
 The first file here specifies my project where i have created a table and managed the datas and found the churn rates. That was just a peice of demo project.
