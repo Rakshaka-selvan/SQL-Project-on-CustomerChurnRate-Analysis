@@ -1,0 +1,30 @@
+CREATE DATABASE telecom_churn_db;
+USE telecom_churn_db;
+CREATE TABLE CustomerChurn(
+             customer_id VARCHAR(20) PRIMARY KEY,
+             gender VARCHAR(10),
+             senior_citizen BOOLEAN,
+             partner BOOLEAN,
+             dependents BOOLEAN,
+             tenure INT,
+             phone_service BOOLEAN,
+             multiple_lines VARCHAR(20),
+             internet_service VARCHAR(20),
+             online_security VARCHAR(20),
+             churn BOOLEAN
+             );
+INSERT INTO CustomerChurn VALUES
+('7590-VHVEG', 'Female', FALSE, TRUE, FALSE, 1, TRUE, 'No', 'DSL', 'Yes', FALSE),
+('5575-GNVDE', 'Male', FALSE, FALSE, FALSE, 34, TRUE, 'Yes', 'Fiber optic', 'No', TRUE),
+('3668-QPYBK', 'Male', FALSE, FALSE, FALSE, 2, TRUE, 'No', 'DSL', 'Yes', FALSE),
+('7795-CFOCW', 'Male', TRUE, FALSE, TRUE, 45, TRUE, 'Yes', 'Fiber optic', 'No', TRUE),
+('9237-HQITU', 'Female', TRUE, TRUE, FALSE, 22, TRUE, 'No', 'DSL', 'Yes', FALSE),
+('5337-IIWKZ', 'Male', FALSE, TRUE, TRUE, 34, FALSE, 'No', 'DSL',  'No', TRUE),
+('2672-TGEFF', 'Female', FALSE, TRUE, TRUE, 37, TRUE, 'Yes', 'Fiber optic', 'No' , TRUE),
+('9231-ZJYAM', 'Female', TRUE, FALSE, FALSE, 4, TRUE, 'No', 'Fiber option', 'No' , FALSE);
+SELECT gender,
+COUNT(*) AS TOTAL,
+SUM(CASE WHEN churn=TRUE THEN 1 ELSE 0 END) AS Churned,
+ROUND(SUM(CASE WHEN churn= TRUE THEN 1 ELSE 0 END),2) AS CHURN_RATE
+FROM CustomerChurn
+GROUP BY gender; 
