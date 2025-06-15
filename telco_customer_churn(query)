@@ -1,0 +1,41 @@
+CREATE TABLE telco_customer_churn (
+    customerID VARCHAR(50) ,
+    gender VARCHAR(10),                         
+    SeniorCitizen TINYINT,                      
+    Partner VARCHAR(3),                          
+    Dependents VARCHAR(3),                       
+    tenure INT,                                  
+    PhoneService VARCHAR(3),                     
+    MultipleLines VARCHAR(30),                   
+    InternetService VARCHAR(20),                
+    OnlineSecurity VARCHAR(30),                 
+    OnlineBackup VARCHAR(30),
+    DeviceProtection VARCHAR(30),
+    TechSupport VARCHAR(30),
+    StreamingTV VARCHAR(30),
+    StreamingMovies VARCHAR(30),
+    Contract VARCHAR(20),                       
+    PaperlessBilling VARCHAR(3),                
+    PaymentMethod VARCHAR(50),                
+    MonthlyCharges DECIMAL(10,2),         
+    TotalCharges VARCHAR(20),                   
+    Churn VARCHAR(3)                            
+);
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Telco-Customer-Churn.csv'
+INTO TABLE telco_customer_churn
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+SELECT COUNT(*) FROM telco_customer_churn WHERE Churn = 'Yes';
+SELECT AVG(MonthlyCharges) FROM telco_customer_churn WHERE Churn='Yes';
+SELECT PaymentMethod, COUNT(*) AS churn_count
+FROM telco_customer_churn 
+WHERE churn="yes"
+GROUP BY PaymentMethod
+ORDER BY churn_count DESC;
+SELECT tenure,COUNT(*) AS total,
+SUM(CASE WHEN Churn='yes'THEN 1 ELSE 0 END) AS churned
+FROM telco_customer_churn
+GROUP BY tenure
+ORDER BY tenure;
